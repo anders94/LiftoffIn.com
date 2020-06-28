@@ -1,5 +1,31 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
+    header.masthead.mb-auto
+      .inner
+        h3.masthead-brand Countdown Timer
+        nav.nav.nav-masthead.justify-content-center
+          a.nav-link.active(href='/') Home
+          a.nav-link(href='/about') About
+
+    main.inner.cover(role='main')
+      .py-5
+        .row
+          .col-lg-8.mx-auto
+            .rounded.bg-gradient-1.text-white.shadow.p-5.text-center.mb-5
+              p.mb-4.font-weight-bold.text-uppercase Liftoff in:
+              #liftoff-in.countdown-circles.d-flex.flex-wrap.justify-content-center.pt-4
+              script(type='text/javascript').
+                $("#liftoff-in").countdown('2021/01/01', function(event) {
+                  $(this).text(event.strftime('%D days %H:%M:%S'));
+                });
+
+      p.lead Make your own timer.
+      p.lead
+        a.btn.btn-lg.btn-secondary(href='#') Create
+
+    footer.mastfoot.mt-auto
+      .inner
+        p by 
+          a(href='https://twitter.com/anders94') @anders94
