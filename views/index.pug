@@ -4,7 +4,7 @@ block content
   .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
     header.masthead.mb-auto
       .inner
-        h3.masthead-brand Countdown Timer
+        h3.masthead-brand Liftoff In...
         nav.nav.nav-masthead.justify-content-center
           a.nav-link.active(href='/') Home
           a.nav-link(href='/about') About
@@ -13,13 +13,12 @@ block content
       .py-5
         .row
           .col-lg-8.mx-auto
-            .rounded.bg-gradient-1.text-white.shadow.p-5.text-center.mb-5
-              p.mb-4.font-weight-bold.text-uppercase Liftoff in:
-              #liftoff-in.countdown-circles.d-flex.flex-wrap.justify-content-center.pt-4
-              script(type='text/javascript').
-                $("#liftoff-in").countdown('2021/01/01', function(event) {
-                  $(this).text(event.strftime('%D days %H:%M:%S'));
-                });
+            p.lead Liftoff In...
+            p#liftoff-in.display-1
+            script(type='text/javascript').
+              $("#liftoff-in").countdown('2020/07/05 10:17:00', function(event) {
+                $(this).text(event.strftime('%D days, %H:%M:%S'));
+              });
 
       p.lead Make your own timer.
       p.lead
