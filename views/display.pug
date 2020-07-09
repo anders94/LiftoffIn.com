@@ -1,0 +1,15 @@
+extends layout
+
+block stylesheets
+  link(rel='stylesheet', href='/stylesheets/lib/flipdown.css')
+
+block javascript
+  script(src='/javascripts/lib/flipdown.js')
+
+block content
+  .container.h-100
+    .row.align-items-center.h-100
+      .col-6.mx-auto
+        p.display-4= message
+        #flipdown.flipdown
+        script(type='text/javascript') new FlipDown(new Date('#{year}/#{month}/#{day} #{hour}:#{minute}:#{second}').getTime() / 1000).start();

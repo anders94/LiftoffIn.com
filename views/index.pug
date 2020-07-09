@@ -1,7 +1,16 @@
 extends layout
 
+block stylesheets
+  link(rel='stylesheet', href='/stylesheets/lib/flipdown.css')
+  link(rel='stylesheet', href='/stylesheets/lib/jquery.datetimepicker.min.css')
+
+block javascript
+  script(src='/javascripts/lib/flipdown.js')
+  script(src='/javascripts/lib/jquery.datetimepicker.full.min.js')
+
 block content
   .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
+
     header.masthead.mb-auto
       .inner
         h3.masthead-brand Liftoff In...
@@ -9,20 +18,26 @@ block content
           a.nav-link.active(href='/') Home
           a.nav-link(href='/about') About
 
-    main.inner.cover(role='main')
-      .py-5
-        .row
-          .col-lg-8.mx-auto
-            p.lead Liftoff In...
-            p#liftoff-in.display-1
-            script(type='text/javascript').
-              $("#liftoff-in").countdown('2020/07/05 10:17:00', function(event) {
-                $(this).text(event.strftime('%D days, %H:%M:%S'));
-              });
+    .row.align-items-center.h-100
+      .col-10.mx-auto
+        #flipdown.flipdown
+        script(type='text/javascript') new FlipDown((new Date().getTime() / 1000) + (86400 * 2) + 5).start();
 
-      p.lead Make your own timer.
-      p.lead
-        a.btn.btn-lg.btn-secondary(href='#') Create
+    .row.align-items-center.h-100
+      .col-10.mx-auto
+        form(method='POST', action='/')
+
+          .input-group.mb-3
+            input.form-control(type='text', name='message', placeholder='Message (optional)', aria-label='Message', aria-describedby='message')
+            input#datetimepicker.form-control(type='text', name='date', placeholder='Date & Time', aria-label='Date & Time', aria-describedby='date')
+            .input-group-append
+              button.btn.btn-outline-primary(type='submit') Create your own
+            script(type='text/javascript').
+              jQuery('#datetimepicker').datetimepicker({
+                formatDate: 'Y/m/d',
+                minDate: 0,
+                maxDate: '2100/01/01'
+              });
 
     footer.mastfoot.mt-auto
       .inner
