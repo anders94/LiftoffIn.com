@@ -5,6 +5,9 @@ const router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index');
 });
+router.get('/about', function(req, res, next) {
+  res.render('about');
+});
 router.post('/', function(req, res, next) {
     const { message, date } = req.body;
     if (date) {
