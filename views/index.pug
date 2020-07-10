@@ -7,6 +7,7 @@ block stylesheets
 block javascript
   script(src='/javascripts/lib/flipdown.js')
   script(src='/javascripts/lib/jquery.datetimepicker.full.min.js')
+  script(src='/javascripts/lib/moment.min.js')
 
 block content
   .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
@@ -30,16 +31,16 @@ block content
 
           .input-group.mb-3
             input.form-control(type='text', name='message', value='Liftoff In...', placeholder='Message (optional)', aria-label='Message', aria-describedby='message')
-            - let date = moment().add(5, 'minutes');
-            input#datetimepicker.form-control(type='text', name='date', value=date.format('YYYY-MM-DD HH:mm:00'), placeholder='Date & Time', aria-label='Date & Time', aria-describedby='date')
+            input#datetimepicker.form-control(type='text', name='date', placeholder='Date & Time', aria-label='Date & Time', aria-describedby='date')
             .input-group-append
               button.btn.btn-outline-primary(type='submit') Create your own
             script(type='text/javascript').
+              let date = moment().add(5, 'minutes');
               jQuery('#datetimepicker').datetimepicker({
                 formatDate: 'Y/m/d',
                 minDate: 0,
                 maxDate: '2100/01/01'
-              });
+              }).val(date.format('YYYY-MM-DD HH:mm:00'));
 
     footer.mastfoot.mt-auto
       .inner
