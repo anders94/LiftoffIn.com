@@ -11,7 +11,7 @@ router.get('/about', function(req, res, next) {
 router.post('/', function(req, res, next) {
     const { message, date } = req.body;
     if (date) {
-	const parsed = moment(date, "YYYY-MM-DD HH:mm:ss");
+	const parsed = moment(date, 'YYYY-MM-DD HH:mm:ss');
 	if (parsed.isValid()) {
 	    const uri = parsed.format('/YYYY/MM/DD/HH/mm/ss/');
 	    res.redirect(uri + encodeURIComponent(message));
@@ -34,8 +34,12 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-router.get('/:year/:month/:day/:hour/:minute/:second/:message', function(req, res, next) {
-    const { year, month, day, hour, minute, second, message } = req.params;
+router.get('/:year/:month/:day/:hour/:minute/:second', show);
+router.get('/:year/:month/:day/:hour/:minute/:second/:message', show);
+
+function show(req, res, next) {
+    const { year, month, day, hour, minute, second } = req.params;
+    const message = req.params.message ? req.params.message : '';
 
     if (!Number.isInteger(year) ||
 	!Number.isInteger(month) ||
@@ -59,6 +63,6 @@ router.get('/:year/:month/:day/:hour/:minute/:second/:message', function(req, re
 		status:'The URL you are using should be just integers.'
 	    }
 	});
-});
+}
 
 module.exports = router;
