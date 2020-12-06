@@ -5,7 +5,7 @@ block stylesheets
   link(rel='stylesheet', href='/stylesheets/lib/jquery.datetimepicker.min.css')
 
 block javascript
-  script(src='/javascripts/lib/flipdown.js')
+  script(src='/javascripts/liftoffin.js')
   script(src='/javascripts/lib/jquery.datetimepicker.full.min.js')
   script(src='/javascripts/lib/moment.min.js')
 
@@ -21,8 +21,16 @@ block content
     .row.align-items-center.h-100
       .col-10.mx-auto
         p.display-4 Liftoff In...
-        #flipdown.flipdown
-        script(type='text/javascript') new FlipDown((new Date().getTime() / 1000) + (86400 * 2) + 5).start();
+        h1.display-1.text-monospace#countdown 00:00:00
+        script.
+          const countDownDate = new Date((new Date().getTime()) + 172810000);
+          const interval = setInterval(function() {
+            if (countDownDate < new Date().getTime()) {
+              clearInterval(interval);
+            }
+            drawTimer(countDownDate, 'countdown');
+          }, 1000);
+          drawTimer(countDownDate, 'countdown');
 
     .row.align-items-center.h-100
       .col-10.mx-auto
